@@ -1,0 +1,26 @@
+<script src="https://unpkg.com/css-doodle@0.15.3/css-doodle.min.js"></script>
+
+<css-doodle id='mydoodle'>
+</css-doodle>
+
+<script>
+var element = document.getElementById("mydoodle")
+element.innerHTML = 
+`:doodle {
+        @grid: 8 / 40%;
+        @shape: circle;` + `background: blue;}` + 
+`
+      transition: .2s @r(.6s);
+      border-radius: @pick(100% 0, 0 100%);
+`
++
+
+`will-change: transform;
+      transform: scale(@r(.25, 1.25));
+
+      background: hsla(
+        calc(240 - 150 * @x * @y),
+        90%, 68%, @r.8
+      );`
+console.log(element)
+</script>
