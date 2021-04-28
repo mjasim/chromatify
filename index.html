@@ -125,6 +125,7 @@
 
 <script>
     colors = ['#1f77b4', '#e377c2', '#2ca02c', '#17becf', '#bcbd22', '#8c564b', '#ff7f0e', '#7f7f7f', '#9467bd', '#d62728'];
+    hues = ['#283593', '#880e4f', '#004d40', '#00838f', '#37474f', '#4e342e', '#bf360c', '#37474f', '#311b92', '#0277bd'];
     shapes = ['circle', 'triangle', 'rhombus', 'star', 'hypocycloid 3', 'hypocycloid 4', 'hypocycloid 5', 'clover 3', 'clover 5', 'bud 4'];
 
     function reload_page() {
@@ -143,10 +144,14 @@
     $(document).on('click', '#chromatifybutton', function () {
         x = document.getElementById('inputtext').value;
         if (x.length > 0) {
-            var prob = get_probability();
-            //temporary for testing only
-            localStorage.setItem('gridbgcolor', colors[Math.floor(Math.random() * colors.length)]);
-            localStorage.setItem('shape', shapes[Math.floor(Math.random() * colors.length)]);
+            // var prob = get_probability();
+
+            var received = Math.random(0, 1);
+            var idx = received.toFixed(1) * 10;
+            console.log(idx);
+            //temporary for testing only. Bring inside the response when ready
+            localStorage.setItem('gridbgcolor', hues[idx]);
+            localStorage.setItem('shape', shapes[idx]);
             $('#dcontainer').load(' #dcontainer > *');
             document.getElementById('dcontainer').setAttribute('style', 'display: flex; width: 400px; height: 400px');
         }
@@ -165,8 +170,6 @@
             success: function (data, status) {
                 console.log(data, status);
                 // This is where the probability mapping will be done
-                localStorage.setItem('gridbgcolor', colors[Math.floor(Math.random() * colors.length)]);
-                localStorage.setItem('shape', shapes[Math.floor(Math.random() * colors.length)]);
             },
         });
     }
