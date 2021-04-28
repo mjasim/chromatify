@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.2.0/math.min.js"></script>
+
+<script src="https://unpkg.com/css-doodle@0.15.3/css-doodle.min.js"></script>
+
+<style>
+    .container {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        /* box-shadow: 0 0 5px 0 rgb(0, 0, 0, 0.1); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+</style>
+
+<!-- <css-doodle id="mydoodle"> </css-doodle> -->
+
+<div class="container" id="doodleSection">
+    <css-doodle id="doodle" click-to-update> </css-doodle>
+    <button
+        type="button"
+        id="savebutton"
+        style="background-color: white; color: black; border-radius: 20px; border: solid thin lightgray; padding: 5px; width: 150px; font-weight: bold; margin-top: 10px"
+    >
+        Save
+    </button>
+</div>
+
+<!-- #0a0c27; -->
+
+<script>
+    var element = document.getElementById('doodle');
+    element.innerHTML =
+        `
+    :doodle {
+        @grid: 7 x 7;
+        @size: 100vmax;
+        background:` +
+        localStorage.getItem('gridbgcolor') +
+        `}
+      @shape:` +
+        localStorage.getItem('shape') +
+        `;
+      background: hsla(
+        calc(360 - @i * 4), 70%, 68%, @r.8
+      );
+      transform:
+        scale(@r(.2, 1))
+        translate(@m2.@r(±50%));`;
+
+    // console.log(element);
+</script>
+
+<!-- <script>
+    const doodle = document.querySelector('css-doodle');
+    doodle.update();
+</script> -->
+
+<script>
+    document.getElementById('savebutton').addEventListener('click', async (e) => {
+        const doodle = document.querySelector('css-doodle');
+        let result = await doodle.export({
+            scale: 6,
+            download: true,
+            name: 'mydoodle',
+        });
+        /* open Dev tools to see the result */
+        console.log(result);
+    });
+</script>

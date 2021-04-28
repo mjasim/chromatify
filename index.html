@@ -1,26 +1,173 @@
-<script src="https://unpkg.com/css-doodle@0.15.3/css-doodle.min.js"></script>
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<css-doodle id='mydoodle'>
-</css-doodle>
+<style>
+    .parentDiv {
+        width: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+        /* box-shadow: 0 0 5px 0 rgb(0, 0, 0, 0.1); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.2.0/math.min.js"></script>
+
+    <script src="https://unpkg.com/css-doodle@0.15.3/css-doodle.min.js"></script>
+
+    <script src="html2canvas.js" type="text/javascript"></script>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
+    <a class="navbar-brand" href="#" onclick="reload_page()" title="Refresh Page and Start Over"> Chromatify </a>
+    <button
+        class="navbar-toggler py-0"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon py-0"></span>
+    </button>
+
+    <div class="collapse navbar-collapse py-0" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto py-0">
+            <li class="nav-item active py-1">
+                <a class="nav-link py-0" href="#" data-toggle="modal" data-target="#aboutModal" title="About">About<span class="sr-only py-0">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="modal fade bd-example-modal-lg" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aboutModalLabel">About</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Ever wanted to lash out at someone in social media but you dd not want to hurt someone or be tagged as a potentially toxic person on the internet? Use Chromatify to transform your
+                    text into an image pattern. You can then download and post the image in any social media platform of your choosing. If you have any question about the project, contact:
+                </p>
+
+                <address>
+                    <b>Mahmood Jasim</b><br />
+                    Graduate Researcher<br />
+                    College of Information and Computer Sciences<br />
+                    University of Massachusetts<br />
+                    Amherst, MA - 01002<br />
+                    Email: <a href="mailto:mjasim@cs.umass.edu">mjasim@cs.umass.edu</a><br />
+                </address>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="parentDiv">
+    <div class="header" style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100%; align-content: center; margin: 1%">
+        <span style="color: #1f77b4"><h1>C</h1></span>
+        <span style="color: #e377c2"><h1>h</h1></span>
+        <span style="color: #2ca02c"><h1>r</h1></span>
+        <span style="color: #17becf"><h1>o</h1></span>
+        <span style="color: #bcbd22"><h1>m</h1></span>
+        <span style="color: #8c564b"><h1>a</h1></span>
+        <span style="color: #ff7f0e"><h1>t</h1></span>
+        <span style="color: #7f7f7f"><h1>i</h1></span>
+        <span style="color: #9467bd"><h1>f</h1></span>
+        <span style="color: #d62728"><h1>y</h1></span>
+    </div>
+
+    <div class="textSection" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; align-content: center; margin: 1%">
+        <div class="textArea">
+            <textarea
+                id="inputtext"
+                placeholder="Enter your text here..."
+                rows="4"
+                style="padding: 10px; width: 500px; margin-bottom: 10px; border: solid thin lightgray; border-radius: 10px"
+            ></textarea>
+        </div>
+        <button type="button" id="chromatifybutton" style="background-color: white; color: black; border-radius: 20px; border: solid thin lightgray; padding: 5px; width: 150px; font-weight: bold">
+            Chromatify
+        </button>
+    </div>
+
+    <div class="doodlecontainer" style="display: none" id="dcontainer">
+        <iframe src="doodle.html" name="targetframe" allowTransparency="true" scrolling="yes" frameborder="0" style="width: 100%; height: 100%"> </iframe>
+    </div>
+</div>
 
 <script>
-var element = document.getElementById("mydoodle")
-element.innerHTML = 
-`:doodle {
-        @grid: 8 / 40%;
-        @shape: circle;` + `background: blue;}` + 
-`
-      transition: .2s @r(.6s);
-      border-radius: @pick(100% 0, 0 100%);
-`
-+
+    colors = ['#1f77b4', '#e377c2', '#2ca02c', '#17becf', '#bcbd22', '#8c564b', '#ff7f0e', '#7f7f7f', '#9467bd', '#d62728'];
+    shapes = ['circle', 'triangle', 'rhombus', 'star', 'hypocycloid 3', 'hypocycloid 4', 'hypocycloid 5', 'clover 3', 'clover 5', 'bud 4'];
 
-`will-change: transform;
-      transform: scale(@r(.25, 1.25));
+    function reload_page() {
+        window.location.reload();
+        return false;
+    }
 
-      background: hsla(
-        calc(240 - 150 * @x * @y),
-        90%, 68%, @r.8
-      );`
-console.log(element)
+    $(document).on('mouseover', '#chromatifybutton', function () {
+        document.getElementById('chromatifybutton').style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    });
+
+    $(document).on('mouseout', '#chromatifybutton', function () {
+        document.getElementById('chromatifybutton').style.backgroundColor = 'white';
+    });
+
+    $(document).on('click', '#chromatifybutton', function () {
+        x = document.getElementById('inputtext').value;
+        if (x.length > 0) {
+            var prob = get_probability();
+            //temporary for testing only
+            localStorage.setItem('gridbgcolor', colors[Math.floor(Math.random() * colors.length)]);
+            localStorage.setItem('shape', shapes[Math.floor(Math.random() * colors.length)]);
+            $('#dcontainer').load(' #dcontainer > *');
+            document.getElementById('dcontainer').setAttribute('style', 'display: flex; width: 400px; height: 400px');
+        }
+    });
+</script>
+
+<script>
+    function get_probability(input_text) {
+        $.ajax({
+            type: 'POST',
+            url: 'http://mjasim.pythonanywhere.com/',
+            data: JSON.stringify({
+                text: input_text,
+            }),
+            contentType: 'application/json;charset=UTF-8',
+            success: function (data, status) {
+                console.log(data, status);
+                // This is where the probability mapping will be done
+                localStorage.setItem('gridbgcolor', colors[Math.floor(Math.random() * colors.length)]);
+                localStorage.setItem('shape', shapes[Math.floor(Math.random() * colors.length)]);
+            },
+        });
+    }
 </script>
