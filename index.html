@@ -13,6 +13,10 @@
         align-items: center;
         flex-direction: column;
     }
+
+    #chromatifybutton:active {
+        transform: translateY(4px);
+    }
 </style>
 
 <head>
@@ -90,87 +94,100 @@
     </div>
 </div>
 
-<div class="parentDiv">
-    <div class="header" style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100%; align-content: center; margin: 1%">
-        <span style="color: #1f77b4"><h1>C</h1></span>
-        <span style="color: #e377c2"><h1>h</h1></span>
-        <span style="color: #2ca02c"><h1>r</h1></span>
-        <span style="color: #17becf"><h1>o</h1></span>
-        <span style="color: #bcbd22"><h1>m</h1></span>
-        <span style="color: #8c564b"><h1>a</h1></span>
-        <span style="color: #ff7f0e"><h1>t</h1></span>
-        <span style="color: #7f7f7f"><h1>i</h1></span>
-        <span style="color: #9467bd"><h1>f</h1></span>
-        <span style="color: #d62728"><h1>y</h1></span>
-    </div>
-
-    <div class="textSection" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; align-content: center; margin: 1%">
-        <div class="textArea">
-            <textarea
-                id="inputtext"
-                placeholder="Enter your text here..."
-                rows="4"
-                style="padding: 10px; width: 500px; margin-bottom: 10px; border: solid thin lightgray; border-radius: 10px"
-            ></textarea>
+<body style="background-color: black">
+    <div class="parentDiv" style="background-color: black">
+        <div class="header" style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100%; align-content: center">
+            <span style="color: #1f77b4"><h1 style="font-size: 5em">C</h1></span>
+            <span style="color: #e377c2"><h1 style="font-size: 5em">h</h1></span>
+            <span style="color: #2ca02c"><h1 style="font-size: 5em">r</h1></span>
+            <span style="color: #17becf"><h1 style="font-size: 5em">o</h1></span>
+            <span style="color: #bcbd22"><h1 style="font-size: 5em">m</h1></span>
+            <span style="color: #8c564b"><h1 style="font-size: 5em">a</h1></span>
+            <span style="color: #ff7f0e"><h1 style="font-size: 5em">t</h1></span>
+            <span style="color: #7f7f7f"><h1 style="font-size: 5em">i</h1></span>
+            <span style="color: #9467bd"><h1 style="font-size: 5em">f</h1></span>
+            <span style="color: #d62728"><h1 style="font-size: 5em">y</h1></span>
         </div>
-        <button type="button" id="chromatifybutton" style="background-color: white; color: black; border-radius: 20px; border: solid thin lightgray; padding: 5px; width: 150px; font-weight: bold">
-            Chromatify
-        </button>
+
+        <div class="textSection" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; align-content: center; margin: 1%">
+            <div class="textArea">
+                <textarea
+                    id="inputtext"
+                    placeholder="Enter your text here..."
+                    rows="4"
+                    style="padding: 10px; width: 500px; margin-bottom: 10px; border: solid thin black; border-radius: 10px; background-color: lightgray"
+                ></textarea>
+            </div>
+            <button
+                type="button"
+                class="btn btn-primary"
+                id="chromatifybutton"
+                style="background-color: lightgray; color: black; border-radius: 20px; border: solid thin black; padding: 5px; width: 150px; font-weight: bold"
+            >
+                Chromatify
+            </button>
+        </div>
+
+        <div class="doodlecontainer" style="display: none" id="dcontainer">
+            <iframe src="doodle.html" name="targetframe" allowTransparency="true" scrolling="yes" frameborder="0" style="width: 100%; height: 100%"> </iframe>
+        </div>
     </div>
 
-    <div class="doodlecontainer" style="display: none" id="dcontainer">
-        <iframe src="doodle.html" name="targetframe" allowTransparency="true" scrolling="yes" frameborder="0" style="width: 100%; height: 100%"> </iframe>
-    </div>
-</div>
+    <script>
+        colors = ['#1f77b4', '#e377c2', '#2ca02c', '#17becf', '#bcbd22', '#8c564b', '#ff7f0e', '#7f7f7f', '#9467bd', '#d62728'];
+        hues = ['#f1f8e9', '#006064', '#004d40', '#01579b', '#0d47a1', '#1a237e', '#4a148c', '#311b92', '#37474f', '#880e4f'];
+        shapes1 = ['circle', 'heptagon', 'hypocycloid 6', 'clover 4', 'fish', 'pentagon', 'bud 5', 'bud 4', 'rhombus', 'triangle'];
+        shapes2 = ['octagon', 'hexagon', 'clover 3', 'clover 5', 'whale', 'star', 'hypocycloid 5', 'hypocycloid 4', 'box', 'hypocycloid 3'];
 
-<script>
-    colors = ['#1f77b4', '#e377c2', '#2ca02c', '#17becf', '#bcbd22', '#8c564b', '#ff7f0e', '#7f7f7f', '#9467bd', '#d62728'];
-    hues = ['#283593', '#880e4f', '#004d40', '#00838f', '#37474f', '#4e342e', '#bf360c', '#37474f', '#311b92', '#0277bd'];
-    shapes = ['circle', 'triangle', 'rhombus', 'star', 'hypocycloid 3', 'hypocycloid 4', 'hypocycloid 5', 'clover 3', 'clover 5', 'bud 4'];
-
-    function reload_page() {
-        window.location.reload();
-        return false;
-    }
-
-    $(document).on('mouseover', '#chromatifybutton', function () {
-        document.getElementById('chromatifybutton').style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    });
-
-    $(document).on('mouseout', '#chromatifybutton', function () {
-        document.getElementById('chromatifybutton').style.backgroundColor = 'white';
-    });
-
-    $(document).on('click', '#chromatifybutton', function () {
-        x = document.getElementById('inputtext').value;
-        if (x.length > 0) {
-            // var prob = get_probability();
-
-            var received = Math.random(0, 1);
-            var idx = received.toFixed(1) * 10;
-            console.log(idx);
-            //temporary for testing only. Bring inside the response when ready
-            localStorage.setItem('gridbgcolor', hues[idx]);
-            localStorage.setItem('shape', shapes[idx]);
-            $('#dcontainer').load(' #dcontainer > *');
-            document.getElementById('dcontainer').setAttribute('style', 'display: flex; width: 400px; height: 400px');
+        function reload_page() {
+            window.location.reload();
+            return false;
         }
-    });
-</script>
 
-<script>
-    function get_probability(input_text) {
-        $.ajax({
-            type: 'POST',
-            url: 'http://mjasim.pythonanywhere.com/',
-            data: JSON.stringify({
-                text: input_text,
-            }),
-            contentType: 'application/json;charset=UTF-8',
-            success: function (data, status) {
-                console.log(data, status);
-                // This is where the probability mapping will be done
-            },
+        $(document).on('mouseover', '#chromatifybutton', function () {
+            document.getElementById('chromatifybutton').style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         });
-    }
-</script>
+
+        $(document).on('mouseout', '#chromatifybutton', function () {
+            document.getElementById('chromatifybutton').style.backgroundColor = 'lightgray';
+        });
+
+        $(document).on('click', '#chromatifybutton', function () {
+            x = document.getElementById('inputtext').value;
+            if (x.length > 0) {
+                setvalue(x);
+            }
+        });
+    </script>
+
+    <script>
+        function setvalue(input_text) {
+            $.ajax({
+                type: 'POST',
+                url: 'http://andredvorak.pythonanywhere.com/',
+                data: JSON.stringify({
+                    text: input_text,
+                }),
+                contentType: 'application/json;charset=UTF-8',
+                success: function (data, status) {
+                    console.log(input_text, data, status);
+                    // This is where the probability mapping will be done
+                    idx = parseInt(parseFloat(data) * 10);
+                    console.log('hue index', idx);
+                    localStorage.setItem('gridbgcolor', hues[idx]);
+                    localStorage.setItem('gridbgcolor', hues[idx]);
+
+                    coinflip = Math.random(0, 1);
+                    if (coinflip <= 0.5) {
+                        localStorage.setItem('shape', shapes1[idx]);
+                    } else {
+                        localStorage.setItem('shape', shapes2[idx]);
+                    }
+
+                    $('#dcontainer').load(' #dcontainer > *');
+                    document.getElementById('dcontainer').setAttribute('style', 'display: flex; width: 400px; height: 400px');
+                },
+            });
+        }
+    </script>
+</body>

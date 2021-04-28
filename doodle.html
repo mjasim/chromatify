@@ -25,6 +25,11 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        background-color: black;
+    }
+
+    #savebutton:active {
+        transform: translateY(4px);
     }
 </style>
 
@@ -35,7 +40,8 @@
     <button
         type="button"
         id="savebutton"
-        style="background-color: white; color: black; border-radius: 20px; border: solid thin lightgray; padding: 5px; width: 150px; font-weight: bold; margin-top: 10px"
+        class="btn btn-primary"
+        style="background-color: lightgray; color: black; border-radius: 20px; border: solid thin black; padding: 5px; width: 150px; font-weight: bold; margin-top: 18px"
     >
         Save
     </button>
@@ -98,18 +104,17 @@
         `
     :doodle {
         @grid: 7 x 7;
-        @size: 100vmax;
+        @size: 90%;
+        @shape: circle;
         background:` +
         localStorage.getItem('gridbgcolor') +
         `}
       @shape:` +
         localStorage.getItem('shape') +
         `;
-      background: hsla(` +
-        `@calc(@rand(360) - ` +
-        hslhue +
-        `),` +
-        `70%, 68%, @r.9
+      background: hsla(
+    calc(360 - @i * 4), 70%, 68%, @r.8
+  );
       );
       transform:
         scale(@r(.2, 1))
@@ -125,6 +130,8 @@
 </script> -->
 
 <script>
+    document.getElementById('savebutton').style.backgroundColor = localStorage.getItem('gridbgcolor');
+
     document.getElementById('savebutton').addEventListener('click', async (e) => {
         const doodle = document.querySelector('css-doodle');
         let result = await doodle.export({
