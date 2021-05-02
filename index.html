@@ -74,17 +74,27 @@
             </div>
             <div class="modal-body">
                 <p>
-                    Ever wanted to lash out at someone in social media but you dd not want to hurt someone or be tagged as a potentially toxic person on the internet? Use Chromatify to transform your
-                    text into an image pattern. You can then download and post the image in any social media platform of your choosing. If you have any question about the project, contact:
+                    Ever wanted to lash out at someone in social media but you did not want to hurt someone or be tagged as a potentially toxic person on the internet? Use Chromatify to transform your
+                    text into an image pattern. You can then download and post the image in any social media platform of your choosing. This project was a collaboration among the following team
+                    members:
                 </p>
 
                 <address>
-                    <b>Mahmood Jasim</b><br />
-                    Graduate Researcher<br />
-                    College of Information and Computer Sciences<br />
-                    University of Massachusetts<br />
-                    Amherst, MA - 01002<br />
-                    Email: <a href="mailto:mjasim@cs.umass.edu">mjasim@cs.umass.edu</a><br />
+                    <b>Ambyr Braxton</b>
+                    (<a href="mailto:abraxton@umass.edu">abraxton@umass.edu</a>)
+                    <br />
+                    <b>André Dvořák</b>
+                    (<a href="mailto:advorak@umass.edu">advorak@umass.edu</a>)
+                    <br />
+                    <b>Madison Trepanier</b>
+                    (<a href="mailto:mtrepanier@umass.edu">mtrepanier@umass.edu</a>)
+                    <br />
+                    <b>Mike Orlando</b>
+                    (<a href="mailto:mtorlando@umass.edu">mtorlando@umass.edu</a>)
+                    <br />
+                    <b>Mahmood Jasim</b>
+                    (<a href="mailto:mjasim@cs.umass.edu">mjasim@cs.umass.edu</a>)
+                    <br />
                 </address>
             </div>
             <div class="modal-footer">
@@ -113,7 +123,7 @@
             <div class="textArea">
                 <textarea
                     id="inputtext"
-                    placeholder="Enter your text here..."
+                    placeholder="Enter the text you want to convert into image here..."
                     rows="4"
                     style="padding: 10px; width: 500px; margin-bottom: 10px; border: solid thin black; border-radius: 10px; background-color: lightgray"
                 ></textarea>
@@ -164,7 +174,7 @@
         function setvalue(input_text) {
             $.ajax({
                 type: 'POST',
-                url: 'http://andredvorak.pythonanywhere.com/',
+                url: 'https://andredvorak.pythonanywhere.com/',
                 data: JSON.stringify({
                     text: input_text,
                 }),
@@ -174,7 +184,6 @@
                     // This is where the probability mapping will be done
                     idx = parseInt(parseFloat(data) * 10);
                     console.log('hue index', idx);
-                    localStorage.setItem('gridbgcolor', hues[idx]);
                     localStorage.setItem('gridbgcolor', hues[idx]);
 
                     coinflip = Math.random(0, 1);
